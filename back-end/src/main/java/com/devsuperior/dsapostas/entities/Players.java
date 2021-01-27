@@ -1,23 +1,38 @@
 package com.devsuperior.dsapostas.entities;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "tb_players")
-public class Players {
+public class Players implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	
-	@Column(unique = true)
 	private String email;
+	
+	@JsonBackReference
+	@ManyToMany
+	@JoinTable(name = "PLAYERS_APOSTAS",
+		joinColumns = @JoinColumn(name = "player_id"),
+		inverseJoinColumns = @JoinColumn(name = "aposta_id"))
+	private List<Apostas> aposta = new ArrayList<>();	
 	
 	public Players() {
 		super();
@@ -54,6 +69,14 @@ public class Players {
 		this.email = email;
 	}
 
+	public List<Apostas> getAposta() {
+		return aposta;
+	}
+	
+	public void setAposta(List<Apostas> aposta) {
+		this.aposta = aposta;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

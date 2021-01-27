@@ -1,7 +1,11 @@
 package com.devsuperior.dsapostas.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
+import com.devsuperior.dsapostas.entities.Apostas;
 import com.devsuperior.dsapostas.entities.Players;
 
 public class PlayersDTO implements Serializable {
@@ -11,6 +15,8 @@ public class PlayersDTO implements Serializable {
 	private String name;
 	private String email;
 	
+	private List<ApostasDTO> apostas = new ArrayList<>();
+	
 	public PlayersDTO() {
 		
 	}
@@ -19,7 +25,7 @@ public class PlayersDTO implements Serializable {
 		super();
 		this.id = id;
 		this.name = name;
-		this.email = email;
+		this.email = email;		
 	}
 	
 	public PlayersDTO(Players dto) {
@@ -27,6 +33,11 @@ public class PlayersDTO implements Serializable {
 		this.id = dto.getId();
 		this.name = dto.getName();
 		this.email = dto.getEmail();
+	}
+	
+	public PlayersDTO(Players entity, Set<Apostas> apostas) {
+		this(entity);
+		apostas.forEach(cat -> this.apostas.add(new ApostasDTO(cat)));
 	}
 
 	public Long getId() {
@@ -52,7 +63,5 @@ public class PlayersDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
 
 }
