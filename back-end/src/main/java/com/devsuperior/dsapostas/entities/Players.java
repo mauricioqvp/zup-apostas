@@ -72,11 +72,11 @@ public class Players implements Serializable {
 	public List<Apostas> getAposta() {
 		return aposta;
 	}
-	
+
 	public void setAposta(List<Apostas> aposta) {
 		this.aposta = aposta;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -36,10 +36,11 @@ public class Apostas implements Serializable {
 		
 	}
 
-	public Apostas(Long id, Integer hunch1, Integer hunch3, Integer hunch4, Integer hunch5) {
+	public Apostas(Long id, Integer hunch1, Integer hunch2, Integer hunch3, Integer hunch4, Integer hunch5) {
 		super();
 		this.id = id;
 		this.hunch1 = hunch1;
+		this.hunch2 = hunch2;
 		this.hunch3 = hunch3;
 		this.hunch4 = hunch4;
 		this.hunch5 = hunch5;
